@@ -55,7 +55,9 @@ if __name__ == "__main__":
                 ["i", "j", "k"]
             ],
          "b2": [],
-         "b3": [{"c": "d"}]
+         "b3": [{"c": "d"}],
+         "b4": true,
+         "b5": false
         }
     }
     """
@@ -82,3 +84,5 @@ if __name__ == "__main__":
     assert l.a.b.last.as_list == ["i", "j", "k"]
     assert list(l.a.b.last) == ["i", "j", "k"]
     assert list(l.a.b3) == [{'c': 'd'}]
+    assert l.a.b4 == True
+    assert l.a.b5 == False
