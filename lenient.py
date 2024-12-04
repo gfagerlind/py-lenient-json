@@ -1,5 +1,7 @@
 #!/usr/bin/python
 import json as json
+
+
 # Lenient Json parsing:
 #
 # Parse json so you can access a la
@@ -25,6 +27,9 @@ class Lenient(dict):
         if not isinstance(obj, list):
             return obj  # if not list, just return it
         return Lenient.from_list(obj)
+
+    def __str__(self):
+        return "" if not len(self) else super(Lenient, self).__str__()
 
     def __eq__(self, other):
         if other is None:
@@ -78,11 +83,13 @@ if __name__ == "__main__":
     assert l.a.X.doesnt.exist == None
     assert l.a.b != None
     assert l.a.b2.last == None
+    assert str(l.a.b2.last) == ""
+    assert str(l.a.b3.last) == str({"c": "d"})
     assert l.a.b.last.last == "k"
     assert l.a.b.first == {"c": "d"}
     assert dict(l.a.b.first) == {"c": "d"}
     assert l.a.b.last.as_list == ["i", "j", "k"]
     assert list(l.a.b.last) == ["i", "j", "k"]
-    assert list(l.a.b3) == [{'c': 'd'}]
+    assert list(l.a.b3) == [{"c": "d"}]
     assert l.a.b4 == True
     assert l.a.b5 == False
